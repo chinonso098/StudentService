@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using StudentService.DataService;
+using Microsoft.EntityFrameworkCore;
 
 namespace StudentService
 {
@@ -22,15 +24,27 @@ namespace StudentService
         }
 
         public IConfiguration Configuration { get; }
+        readonly string CorsApi = "CorsApi";
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
             services.AddControllers();
+
+            services.AddDbContext<StudentServiceContext>(opt => opt.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name:CorsApi,
+                    builder => builder.WithOrigins("http://localhost:4200", "http://mywebsite.com")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod());
+            });
+
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "StudentService", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TestApi", Version = "v1" });
             });
         }
 
@@ -41,10 +55,12 @@ namespace StudentService
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "StudentService v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TestApi v1"));
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors(CorsApi);
 
             app.UseRouting();
 
