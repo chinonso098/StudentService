@@ -38,7 +38,7 @@ namespace StudentService.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Address> GetAddressByStudentId(int id)
         {
-            if (_dbContext.Addresses.Where(a => a.StudentID == id) == null)
+            if (_dbContext.Addresses.Where(a => a.StudentID == id).Count()==0)
                 return NotFound();
             else
                 return Ok(_dbContext.Addresses.Where(a => a.StudentID == id).First());
@@ -50,7 +50,6 @@ namespace StudentService.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult PostAddress(Address address) 
         {
-
             _dbContext.Addresses.Add(address);
             _dbContext.SaveChanges();
 

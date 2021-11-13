@@ -44,7 +44,7 @@ namespace StudentService
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TestApi", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "StudentService", Version = "v1" });
             });
         }
 
@@ -55,7 +55,7 @@ namespace StudentService
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TestApi v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "StudentService v1"));
             }
 
             app.UseHttpsRedirection();
