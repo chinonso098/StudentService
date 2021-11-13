@@ -40,34 +40,5 @@ namespace StudentService.DataService
         //        new Address { AddressID = 2, StudentID = 2, StreetOne = "9621 Pinta Lane", StreetTwo = String.Empty, City = "Nina", StateID = 2, ZipCode = "52145" });
         //}
 
-
-
-        //private readonly IConfiguration _config;
-        //public StudentServiceContext(IConfiguration config)
-        //{
-        //    _config = config;
-        //}
-
-        //public string DbPath { get; private set; }
-
-
-        //public StudentServiceContext() 
-        //{
-        //    var folder = Environment.SpecialFolder.LocalApplicationData;
-        //    var path = Environment.GetFolderPath(folder);
-        //    DbPath = $"{path}{System.IO.Path.DirectorySeparatorChar}studentservice.db";
-        //}
-
-
-
-
-        //protected override void OnConfiguring(DbContextOptionsBuilder options) 
-        //{
-        //    base.OnConfiguring(options);
-
-        //    options.UseSqlServer(_config["ConnectionStrings:AWSConnection"]);
-        //}
-
-
     }
 }

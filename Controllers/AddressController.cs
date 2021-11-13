@@ -22,7 +22,6 @@ namespace StudentService.Controllers
             this._dbContext = injectedSSC;
         }
 
-
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -32,9 +31,7 @@ namespace StudentService.Controllers
                 return NotFound();
             else
                 return Ok(_dbContext.Addresses.Find(id));
-
         }
-
 
         [HttpGet("GetAddressByStudentId/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -45,9 +42,7 @@ namespace StudentService.Controllers
                 return NotFound();
             else
                 return Ok(_dbContext.Addresses.Where(a => a.StudentID == id).First());
-
         }
-
 
         [HttpPost]
         [Consumes(MediaTypeNames.Application.Json)]
@@ -61,7 +56,6 @@ namespace StudentService.Controllers
 
             return CreatedAtAction(nameof(GetAddressById), new { id = address.AddressID }, address);
         }
-
 
         [HttpPut]
         [Consumes(MediaTypeNames.Application.Json)]

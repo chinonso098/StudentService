@@ -23,7 +23,6 @@ namespace StudentService.Controllers
             this._dbContext = injectedSSC;
         }
 
-
         // GET: api/Students
         [HttpGet]
         public IEnumerable<Student> GetStudentsAsync() 
@@ -43,7 +42,6 @@ namespace StudentService.Controllers
              return _dbContext.Students.Find(id);
         }
 
-
         [HttpPost]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -56,7 +54,6 @@ namespace StudentService.Controllers
 
             return CreatedAtAction(nameof(GetById), new { id = student.StudentID }, student);
         }
-
 
         [HttpPut]
         [Consumes(MediaTypeNames.Application.Json)]
@@ -97,6 +94,5 @@ namespace StudentService.Controllers
                 return NoContent();
             }
         }
-
     }
 }
