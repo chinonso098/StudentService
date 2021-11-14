@@ -3,12 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StudentService.DataService;
 using StudentService.DomainObjects;
-
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mime;
-using System.Threading.Tasks;
+
 namespace StudentService.Controllers
 {
     [ApiController]
@@ -48,7 +46,7 @@ namespace StudentService.Controllers
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult PostAddress(Address address) 
+        public IActionResult CreateAddress(Address address) 
         {
             _dbContext.Addresses.Add(address);
             _dbContext.SaveChanges();
@@ -61,7 +59,7 @@ namespace StudentService.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult PutAddress(Address address) 
+        public IActionResult UpdateAddress(Address address) 
         {
 
             if (_dbContext.Addresses.Find(address.AddressID) == null)
