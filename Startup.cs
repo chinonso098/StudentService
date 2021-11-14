@@ -1,15 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using StudentService.DataService;
 using Microsoft.EntityFrameworkCore;
@@ -32,7 +26,15 @@ namespace StudentService
 
             services.AddControllers();
 
-            services.AddDbContext<StudentServiceContext>(opt => opt.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
+            // TODO: create connection  with user & pw
+            var builder = new SqlConnectionStringBuilder(Configuration["ConnectionStrings:AWSConnection"]);
+            builder.UserID = Configuration["DbUserName"];
+            builder.Password = Configuration["DbPassWord"];
+
+            var connection = builder.ConnectionString;
+            services.AddDbContext<StudentServiceContext>(opt => opt.UseSqlServer(connection));
+
+            //services.AddDbContext<StudentServiceContext>(opt => opt.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
 
             services.AddCors(options =>
             {

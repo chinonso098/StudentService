@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace StudentService.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class IntiCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,9 +11,9 @@ namespace StudentService.Migrations
                 name: "States",
                 columns: table => new
                 {
-                    StateID = table.Column<int>(type: "int", nullable: false)
+                    StateID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -24,16 +24,16 @@ namespace StudentService.Migrations
                 name: "Students",
                 columns: table => new
                 {
-                    StudentID = table.Column<int>(type: "int", nullable: false)
+                    StudentID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Age = table.Column<int>(type: "int", nullable: false),
-                    StudentNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DoB = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AdmissionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Program = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Age = table.Column<int>(nullable: false),
+                    StudentNumber = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    DoB = table.Column<DateTime>(nullable: false),
+                    AdmissionDate = table.Column<DateTime>(nullable: false),
+                    Program = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -44,14 +44,14 @@ namespace StudentService.Migrations
                 name: "Addresses",
                 columns: table => new
                 {
-                    AddressID = table.Column<int>(type: "int", nullable: false)
+                    AddressID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StudentID = table.Column<int>(type: "int", nullable: false),
-                    StreetOne = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StreetTwo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StateID = table.Column<int>(type: "int", nullable: false),
-                    ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    StudentID = table.Column<int>(nullable: false),
+                    StreetOne = table.Column<string>(nullable: true),
+                    StreetTwo = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true),
+                    StateID = table.Column<int>(nullable: false),
+                    ZipCode = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

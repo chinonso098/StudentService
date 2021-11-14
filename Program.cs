@@ -18,6 +18,13 @@ namespace StudentService
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((context, builder) =>
+                {
+                   if (!context.HostingEnvironment.IsDevelopment())
+                   {
+                       builder.AddSystemsManager("/studentportal");
+                   }
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

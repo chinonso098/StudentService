@@ -10,15 +10,15 @@ using StudentService.DataService;
 namespace StudentService.Migrations
 {
     [DbContext(typeof(StudentServiceContext))]
-    [Migration("20211113013525_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20211114030408_IntiCreate")]
+    partial class IntiCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("ProductVersion", "3.1.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("StudentService.DomainObjects.Address", b =>
@@ -119,10 +119,6 @@ namespace StudentService.Migrations
                         .HasForeignKey("StudentID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("State");
-
-                    b.Navigation("Student");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,0 +1,45 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  StudentService Api
+
+
+Resources:
+  AspNetCoreFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      Handler: StudentService::StudentService.LambdaEntryPoint::FunctionHandlerAsync
+      Runtime: dotnetcore3.1
+      CodeUri: ''
+      MemorySize: 256
+      Timeout: 30
+      Role: arn:aws:iam::423319894549:role/student_service_api
+      # Policies:
+      #   -'AWSLambdaFullAccess'
+      #   -'AmazonSSMReadOnlyAccess'
+      #   -'AWSLambdaVPCAccessExecutionRole'
+      Events:
+        ProxyResource:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
+        RootResource:
+          Type: Api
+          Properties:
+            Path: '/'
+            Method: ANY
+
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  StudentServiceApi:
+    Description: "API Gateway endpoint URL for Prod stage for student service api"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+  # StudentServiceFunction:
+  #   Description: "Hello World Lambda Function ARN"
+  #   Value: !GetAtt StudentServiceFunction.Arn
+  # StudentServiceFunctionIamRole:
+  #   Description: "Implicit IAM Role created for Hello World function"
+  #   Value: !GetAtt StudentServiceFunctionRole.Arn
