@@ -39,9 +39,9 @@ namespace StudentService
             services.AddCors(options =>
             {
                 options.AddPolicy(name:CorsApi,
-                    builder => builder.WithOrigins("http://localhost:4200", "http://mywebsite.com")
-                        .AllowAnyHeader()
-                        .AllowAnyMethod());
+                    builder => builder.AllowAnyOrigin()
+                                      .AllowAnyHeader()
+                                      .AllowAnyMethod());
             });
 
             services.AddSwaggerGen(c =>
